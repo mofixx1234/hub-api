@@ -5,6 +5,7 @@
   "description": "API Hub — authentification et session unique",
   "main": "src/server.js",
   "scripts": {
+    "build": "node -e \"process.exit(0)\"",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "db:migrate": "cd ../backend && npm exec --prefix ../server -- sequelize-cli db:migrate",
