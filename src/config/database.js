@@ -5,7 +5,9 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
 if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL est requis dans .env');
+  throw new Error(
+    'DATABASE_URL manquant. Local : fichier .env. Vercel : Project → Settings → Environment Variables.'
+  );
 }
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {

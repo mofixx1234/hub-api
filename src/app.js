@@ -4,6 +4,7 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
+const { uploadsRoot } = require('./config/upload.paths');
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
@@ -63,7 +64,7 @@ app.use(express.json({ limit: '1mb' }));
 /** Routes publiques (sans jeton) — avant garde-fous auth sur les autres préfixes /api. */
 app.use('/api/public', publicRoutes);
 
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/uploads', express.static(uploadsRoot));
 
 const limiteGlobal = rateLimit({
   windowMs: 60 * 1000,

@@ -20,6 +20,7 @@ const {
   SessionActive,
   ActivityLog,
 } = require('../models');
+const { avatarsDir } = require('../config/upload.paths');
 const {
   profilMajSchema,
   preferencesMajSchema,
@@ -187,7 +188,7 @@ async function postAvatar(req, res, next) {
     await u.update({ photo_url: rel });
 
     if (ancien && ancien.startsWith('/uploads/avatars/')) {
-      const abs = path.join(__dirname, '../../uploads/avatars', path.basename(ancien));
+      const abs = path.join(avatarsDir, path.basename(ancien));
       try {
         if (fs.existsSync(abs)) fs.unlinkSync(abs);
       } catch {

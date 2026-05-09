@@ -1,10 +1,16 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { avatarsDir: uploadDir } = require('../config/upload.paths');
 
-const uploadDir = path.join(__dirname, '../../uploads/avatars');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
+try {
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+} catch (err) {
+  // eslint-disable-next-line no-console
+  console.error('[upload.avatar] Création du répertoire impossible :', uploadDir, err.message);
+  throw err;
 }
 
 const storage = multer.diskStorage({
