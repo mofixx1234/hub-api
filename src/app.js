@@ -32,19 +32,15 @@ const { verifierAbonnementEvalClasse } = require('./middleware/eval-classe-abonn
 
 const app = express();
 
+/*
 const origines = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(',').map((s) => s.trim())
   : true;
 
-app.set('trust proxy', 1);
-
-app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Liste des origines autorisées
       const allowed = Array.isArray(origines) ? origines : [origines];
-      // Ajouter l'origine supplémentaire demandée
       allowed.push('https://hub-one-lilac.vercel.app');
       if (!origin || allowed.includes(origin)) {
         callback(null, true);
@@ -52,6 +48,19 @@ app.use(
         callback(new Error('Origine non autorisée par CORS'));
       }
     },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Wave-Signature'],
+  })
+);
+*/
+
+app.set('trust proxy', 1);
+
+app.use(helmet());
+app.use(
+  cors({
+    origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Wave-Signature'],
