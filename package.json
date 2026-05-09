@@ -1,0 +1,40 @@
+{
+  "name": "hub-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "API Hub — authentification et session unique",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:migrate": "cd ../backend && npm exec --prefix ../server -- sequelize-cli db:migrate",
+    "db:migrate:undo": "cd ../backend && npm exec --prefix ../server -- sequelize-cli db:migrate:undo",
+    "db:rollback": "cd ../backend && npm exec --prefix ../server -- sequelize-cli db:migrate:undo",
+    "db:seed": "cd ../backend && npm exec --prefix ../server -- sequelize-cli db:seed:all",
+    "db:create": "cd ../backend && npm exec --prefix ../server -- sequelize-cli db:create"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.16",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.5",
+    "uuid": "^11.0.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "sequelize-cli": "^6.6.2"
+  }
+}

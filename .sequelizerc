@@ -1,0 +1,12 @@
+/**
+ * Sequelize CLI — si vous lancez la CLI depuis le dossier `server/`.
+ * Les migrations officielles sont dans backend/migrations/ (une seule source de vérité).
+ */
+const path = require('path');
+
+module.exports = {
+  config: path.resolve(__dirname, '..', 'backend', 'config', 'config.js'),
+  'models-path': path.resolve(__dirname, 'src', 'models'),
+  'seeders-path': path.resolve(__dirname, '..', 'backend', 'seeders'),
+  'migrations-path': path.resolve(__dirname, '..', 'backend', 'migrations'),
+};
