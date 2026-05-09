@@ -41,7 +41,17 @@ app.set('trust proxy', 1);
 app.use(helmet());
 app.use(
   cors({
-    origin: origines,
+    origin: (origin, callback) => {
+      // Liste des origines autorisées
+      const allowed = Array.isArray(origines) ? origines : [origines];
+      // Ajouter l'origine supplémentaire demandée
+      allowed.push('https://hub-one-lilac.vercel.app');
+      if (!origin || allowed.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Origine non autorisée par CORS'));
+      }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Wave-Signature'],
