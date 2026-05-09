@@ -52,7 +52,7 @@ app.get('/health', (req, res) => {
   res.json({ statut: 'ok', service: 'hub-api' });
 });
 
-/** Wave envoie du JSON brut — accepter tout Content-Type qualifié côté Wave. */
+/** Wave envoie du JSON brut — accepter tout Content-Type qualifié côté Wave. ssssss*/
 app.post(
   '/api/webhooks/wave',
   express.raw({ type: () => true, limit: '512kb' }),
