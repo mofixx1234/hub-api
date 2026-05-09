@@ -57,13 +57,18 @@ app.use(
 
 app.set('trust proxy', 1);
 
-app.use(helmet());
+/** CORS avant helmet : en-têtes visibles sur les réponses OPTIONS ; CORP « cross-origin » pour APIs consommées depuis un autre domaine. */
 app.use(
   cors({
     origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Wave-Signature'],
+  })
+);
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
   })
 );
 
@@ -91,6 +96,7 @@ const limiteGlobal = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { erreur: 'Trop de requêtes. Réessayez dans une minute.' },
+  skip: (req) => req.method === 'OPTIONS',
 });
 
 const limiteConnexion = rateLimit({
@@ -99,6 +105,7 @@ const limiteConnexion = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { erreur: 'Trop de tentatives de connexion depuis cette adresse.' },
+  skip: (req) => req.method === 'OPTIONS',
 });
 
 app.use('/api', limiteGlobal);
